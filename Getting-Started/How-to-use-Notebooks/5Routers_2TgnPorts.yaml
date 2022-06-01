@@ -1,0 +1,218 @@
+# 1.0.3 vxr-amd-03:/nobackup/sasamuel/aws-notebooks/Put-Technology-to-Work/QoS
+connections:
+  hubs:
+    hub570:
+    - rce1.FourH0/0/0/0
+    - rpe1.FourH0/0/0/0
+    hub571:
+    - rpe1.FourH0/0/0/1
+    - rp1.FourH0/0/0/1
+    hub572:
+    - rp1.FourH0/0/0/0
+    - rpe2.FourH0/0/0/1
+    hub573:
+    - rpe2.FourH0/0/0/0
+    - rce2.FourH0/0/0/0
+    hub574:
+    - trex.eth1
+    - rpe1.FourH0/0/0/2
+    hub575:
+    - trex.eth2
+    - rpe2.FourH0/0/0/2
+devices:
+  rce1:
+    data_ports:
+    - FourH0/0/0/0
+    - FourH0/0/0/1
+    disks:
+    - hda_ref:
+        file: /opt/cisco/images/8000/xr7/7.3.1/8000-x64-7.3.1.qcow2 
+        type: reference
+    linecard_types:
+    - 8201-sys
+    platform: spitfire_f-baked
+    vxr_sim_config:
+      shelf:
+        Config:
+        - &id001
+          device: Bmc
+          param: Disable
+          value: 'true'
+        ConfigEnableNgdp: 'true'
+        ConfigOvxr: 'true'
+        ConfigS1NpsuiteVer: 1.68.3
+        ConfigS1SdkVer: 1.35.2.7
+    xr_config: "\nssh server v2\nssh server netconf\nnetconf-yang agent ssh\n\nhostname\
+      \ CE1\n!\npolicy-map set-dscp\n class class-default\n  set dscp ef\n ! \n end-policy-map\n\
+      !\ninterface Loopback0\n ipv4 address 209.165.200.231 255.255.255.255\n!\ninterface\
+      \ FourHundredGigE0/0/0/0\n description Connected_to_PE1\n mtu 9216\n ipv4 address\
+      \ 203.0.113.1 255.255.255.0\n no shutdown\n!\nrouter static\n address-family\
+      \ ipv4 unicast\n  209.165.201.0/24 203.0.113.2\n !\n!\n"
+    xr_port_redir:
+    - 22
+    - 830
+  rce2:
+    data_ports:
+    - FourH0/0/0/0
+    - FourH0/0/0/1
+    disks:
+    - hda_ref:
+        file: /opt/cisco/images/8000/xr7/7.3.1/8000-x64-7.3.1.qcow2 
+        type: reference
+    linecard_types:
+    - 8201-sys
+    platform: spitfire_f-baked
+    vxr_sim_config:
+      shelf:
+        Config:
+        - *id001
+        ConfigEnableNgdp: 'true'
+        ConfigOvxr: 'true'
+        ConfigS1NpsuiteVer: 1.68.3
+        ConfigS1SdkVer: 1.35.2.7
+    xr_config: "\nssh server v2\nssh server netconf\nnetconf-yang agent ssh\n\nhostname\
+      \ CE2\n!\ninterface Loopback0\n ipv4 address 209.165.200.233 255.255.255.255\n\
+      !\ninterface FourHundredGigE0/0/0/0\n description Connected_to_PE2\n mtu 9216\n\
+      \ ipv4 address 209.165.201.1 255.255.255.224\n no shutdown\n!\nrouter static\n\
+      \ address-family ipv4 unicast\n  203.0.113.0/24 209.165.201.2\n !\n!\n"
+    xr_port_redir:
+    - 22
+    - 830
+  rp1:
+    data_ports:
+    - FourH0/0/0/0
+    - FourH0/0/0/1
+    disks:
+    - hda_ref:
+        file: /opt/cisco/images/8000/xr7/7.3.1/8000-x64-7.3.1.qcow2 
+        type: reference
+    linecard_types:
+    - 8201-sys
+    platform: spitfire_f-baked
+    vxr_sim_config:
+      shelf:
+        Config:
+        - *id001
+        ConfigEnableNgdp: 'true'
+        ConfigOvxr: 'true'
+        ConfigS1NpsuiteVer: 1.68.3
+        ConfigS1SdkVer: 1.35.2.7
+    xr_config: "\nssh server v2\nssh server netconf\nnetconf-yang agent ssh\n\nhostname\
+      \ P1\nline console\n exec-timeout 0 0\n absolute-timeout 0\n session-timeout\
+      \ 0\n!\nline default\n exec-timeout 0 0\n absolute-timeout 0\n session-timeout\
+      \ 0\n!\ninterface Loopback0\n ipv4 address 209.165.200.225 255.255.255.255\n\
+      !\ninterface FourHundredGigE0/0/0/0\n description Connected_to_PE2\n mtu 9216\n\
+      \ ipv4 address 198.51.100.1 255.255.255.0\n no shutdown\n!\ninterface FourHundredGigE0/0/0/1\n\
+      \ description Connected_to_PE1\n mtu 9216\n ipv4 address 192.0.2.1 255.255.255.0\n\
+      \ no shutdown\n!\nrouter ospf 10\n router-id 209.165.200.225\n area 0\n  interface\
+      \ FourHundredGigE0/0/0/0\n  interface FourHundredGigE0/0/0/1\n  interface Loopback0\n\
+      \  !\n !\n!\nmpls ldp\n router-id 209.165.200.225\n interface FourHundredGigE0/0/0/1\n\
+      \ interface FourHundredGigE0/0/0/0\n !\n!\n "
+    xr_port_redir:
+    - 22
+    - 830
+  rpe1:
+    data_ports:
+    - FourH0/0/0/0
+    - FourH0/0/0/1
+    - FourH0/0/0/2
+    disks:
+    - hda_ref:
+        file: /opt/cisco/images/8000/xr7/7.3.1/8000-x64-7.3.1.qcow2 
+        type: reference
+    linecard_types:
+    - 8201-sys
+    platform: spitfire_f-baked
+    vxr_sim_config:
+      shelf:
+        Config:
+        - *id001
+        ConfigEnableNgdp: 'true'
+        ConfigOvxr: 'true'
+        ConfigS1NpsuiteVer: 1.68.3
+        ConfigS1SdkVer: 1.35.2.7
+    xr_config: "\nssh server v2\nssh server netconf\nnetconf-yang agent ssh\n\nhostname\
+      \ PE1\nline console\n exec-timeout 0 0\n absolute-timeout 0\n session-timeout\
+      \ 0\n!\nline default\n exec-timeout 0 0\n absolute-timeout 0\n session-timeout\
+      \ 0\n!\ninterface Loopback0\n ipv4 address 209.165.200.227 255.255.255.255\n\
+      !\ninterface FourHundredGigE0/0/0/0\n description Connected_to_CE1\n mtu 9216\n\
+      \ ipv4 address 203.0.113.2 255.255.255.0\n no shutdown\n!\ninterface FourHundredGigE0/0/0/1\n\
+      \ description Connected_to_P1\n mtu 9216\n ipv4 address 192.0.2.2 255.255.255.0\n\
+      \ no shutdown\n!\ninterface FourHundredGigE0/0/0/2\n description Connected_to_TREX\n\
+      \ mtu 9216\n ipv4 address 10.0.0.2 255.255.255.0\n no shutdown\n!\nrouter ospf\
+      \ 10\n router-id 209.165.200.227\n area 0\n  interface FourHundredGigE0/0/0/0\n\
+      \  interface FourHundredGigE0/0/0/1\n  interface FourHundredGigE0/0/0/2\n  interface\
+      \ Loopback0\n  !\n !\n!\nmpls ldp\n router-id 209.165.200.227\n interface FourHundredGigE0/0/0/0\n\
+      \ interface FourHundredGigE0/0/0/1\n interface FourHundredGigE0/0/0/2\n !\n\
+      !\n "
+    xr_port_redir:
+    - 22
+    - 830
+  rpe2:
+    data_ports:
+    - FourH0/0/0/0
+    - FourH0/0/0/1
+    - FourH0/0/0/2
+    disks:
+    - hda_ref:
+        file: /opt/cisco/images/8000/xr7/7.3.1/8000-x64-7.3.1.qcow2 
+        type: reference
+    linecard_types:
+    - 8201-sys
+    platform: spitfire_f-baked
+    vxr_sim_config:
+      shelf:
+        Config:
+        - *id001
+        ConfigEnableNgdp: 'true'
+        ConfigOvxr: 'true'
+        ConfigS1NpsuiteVer: 1.68.3
+        ConfigS1SdkVer: 1.35.2.7
+    xr_config: "\nssh server v2\nssh server netconf\nnetconf-yang agent ssh\n\nhostname\
+      \ PE2\nline console\n exec-timeout 0 0\n absolute-timeout 0\n session-timeout\
+      \ 0\n!\nline default\n exec-timeout 0 0\n absolute-timeout 0\n session-timeout\
+      \ 0\n!\ninterface Loopback0\n ipv4 address 209.165.200.229 255.255.255.255\n\
+      !\ninterface FourHundredGigE0/0/0/0\n description Connected_to_CE2\n mtu 9216\n\
+      \ ipv4 address 209.165.201.2 255.255.255.224\n no shutdown\n !\ninterface FourHundredGigE0/0/0/1\n\
+      \ description Connected_to_P1\n mtu 9216\n ipv4 address 198.51.100.2 255.255.255.0\n\
+      \ no shutdown\n!\ninterface FourHundredGigE0/0/0/2\n description Connected_to_TREX\n\
+      \ mtu 9216\n ipv4 address 10.1.1.2 255.255.255.0\n no shutdown\n!\nrouter ospf\
+      \ 10\n router-id 209.165.200.229\n area 0\n  interface FourHundredGigE0/0/0/0\n\
+      \  interface FourHundredGigE0/0/0/1\n  interface FourHundredGigE0/0/0/2\n  interface\
+      \ Loopback0\n  !\n !\n!\nmpls ldp\n router-id 209.165.200.229\n interface FourHundredGigE0/0/0/0\n\
+      \ interface FourHundredGigE0/0/0/1\n interface FourHundredGigE0/0/0/2\n !\n\
+      !\n "
+    xr_port_redir:
+    - 22
+    - 830
+  trex:
+    data_ports:
+    - eth1
+    - eth2
+    disks:
+    - hda_ref:
+        file: /opt/cisco/images/linux/centos7_serial.qcow2
+        type: reference
+    memory: 5GB
+    platform: linux
+    vcpu: 8
+    vxr_sim_config:
+      shelf:
+        Config:
+        - device: ''
+          param: EnableNgdp
+          value: 'true'
+    xr_port_redir:
+    - 21
+    - 22
+    - 23
+    - 50
+    - 53
+    - 80
+simulation:
+  pyvxr_flags:
+    port_file_timeout: 1200
+  sim_dir: /nobackup/vxr/pyvxr/1842g4pjik
+  sim_host: localhost
+  sim_rel: /opt/cisco/vxr2/latest
+  skip_auto_bringup: false

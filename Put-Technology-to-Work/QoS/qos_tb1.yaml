@@ -1,0 +1,31 @@
+devices:
+  R1:
+    alias: r1
+    connections:
+      cli:
+        ip: 172.17.0.2
+        port: 40944
+        protocol: telnet
+    credentials:
+      default:
+        password: cisco123
+        username: cisco
+    os: iosxr
+    platform: spitfire
+    type: router
+  R2:
+    alias: r2
+    connections:
+      cli:
+        ip: 172.17.0.2
+        port: 33812
+        protocol: telnet
+    credentials:
+      default:
+        password: cisco123
+        username: cisco
+    os: iosxr
+    platform: spitfire
+    type: router
+testbed:
+  name: QoS-Testbed
