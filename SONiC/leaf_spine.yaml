@@ -1,0 +1,73 @@
+devices:
+  L0:
+    alias: L0
+    connections:
+      cli:
+        ip: 172.17.0.7
+        port: 64332
+        protocol: ssh
+    credentials:
+      default:
+        password: cisco123
+        username: cisco
+    os: linux
+    platform: spitfire
+    type: linux
+  L1:
+    alias: L1
+    connections:
+      cli:
+        ip: 172.17.0.7
+        port: 60338
+        protocol: ssh
+    credentials:
+      default:
+        password: cisco123
+        username: cisco
+    os: linux
+    platform: spitfire
+    type: linux
+  S0:
+    alias: S0
+    connections:
+      cli:
+        ip: 172.17.0.7
+        port: 60949
+        protocol: ssh
+    credentials:
+      default:
+        password: cisco123
+        username: cisco
+    os: linux
+    platform: spitfire
+    type: linux
+  S1:
+    alias: S1
+    connections:
+      cli:
+        ip: 172.17.0.7
+        port: 60443
+        protocol: ssh
+    credentials:
+      default:
+        password: cisco123
+        username: cisco
+    os: linux
+    platform: spitfire
+    type: linux
+  trex:
+    alias: trex
+    connections:
+      cli:
+        ip: 172.17.0.7
+        port: 63051
+        protocol: ssh
+    credentials:
+      default:
+        password: cisco123
+        username: root
+    os: linux
+    platform: linux
+    type: linux
+testbed:
+  name: Sonic-Testbed
