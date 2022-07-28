@@ -4,7 +4,7 @@ devices:
     connections:
       cli:
         ip: 10.10.20.23
-        port: 60000
+        port: 60001
         protocol: telnet
     credentials:
       default:
@@ -18,7 +18,7 @@ devices:
     connections:
       cli:
         ip: 10.10.20.23
-        port: 60001
+        port: 60002
         protocol: telnet
     credentials:
       default:
@@ -32,7 +32,7 @@ devices:
     connections:
       cli:
         ip: 10.10.20.23
-        port: 60002
+        port: 60003
         protocol: telnet
     credentials:
       default:
@@ -60,8 +60,8 @@ devices:
     connections:
       cli:
         ip: 10.10.20.23
-        port: 60005
-        protocol: telnet
+        port: 60022
+        protocol: ssh
     credentials:
       default:
         password: cisco123
