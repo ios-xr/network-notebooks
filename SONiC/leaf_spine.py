@@ -1,4 +1,4 @@
-# This is a small library that can be reused to bring up 2 Leaf 2 Spine network topology with Cisco 8000
+# Python library for 2 Leaf 2 Spine 3-Stage Clos topology with Cisco 8000 variants 8102-64H and 8101-32H
 # AUTHOR: Sarah Samuel (sasamuel@cisco.com)
 # DATE: 10 November 2021
 
@@ -12,7 +12,7 @@ import shutil
 import getpass
 import string
 import random
-import genie
+#import genie
 print(sys.version)
 logger = logging.getLogger()
 logger.setLevel(logging.ERROR)
