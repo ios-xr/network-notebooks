@@ -113,13 +113,13 @@ cfg = { 'simulation':
          'connections':
           {'hubs':
            {'S0_L0_conn1':['S0.Ethernet0', 'L0.Ethernet0'],
-            'S0_L0_conn2':['S0.Ethernet2', 'L0.Ethernet3'],
-            'S0_L1_conn1':['S0.Ethernet1', 'L1.Ethernet0'],
-            'S0_L1_conn2':['S0.Ethernet3', 'L1.Ethernet3'],
-            'S1_L0_conn1':['S1.Ethernet0', 'L0.Ethernet1'],
-            'S1_L0_conn2':['S1.Ethernet2', 'L0.Ethernet4'],
-            'S1_L1_conn1':['S1.Ethernet1', 'L1.Ethernet1'],
-            'S1_L1_conn2':['S1.Ethernet3', 'L1.Ethernet4'],
+            'S0_L0_conn2':['S0.Ethernet1', 'L0.Ethernet1'],
+            'S0_L1_conn1':['S0.Ethernet2', 'L1.Ethernet3'],
+            'S0_L1_conn2':['S0.Ethernet3', 'L1.Ethernet4'],
+            'S1_L0_conn1':['S1.Ethernet0', 'L0.Ethernet3'],
+            'S1_L0_conn2':['S1.Ethernet1', 'L0.Ethernet4'],
+            'S1_L1_conn1':['S1.Ethernet2', 'L1.Ethernet0'],
+            'S1_L1_conn2':['S1.Ethernet3', 'L1.Ethernet1'],
             'L0_trex':['L0.Ethernet2', 'trex.eth1'],
             'L1_trex':['L1.Ethernet2', 'trex.eth2']
            }
