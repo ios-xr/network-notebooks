@@ -27,8 +27,8 @@ def generate_bidir_traffic(trexipaddress, trexport):
 
     # SFTP for file transfer
     transfer = client.open_sftp()
-    transfer.put("/home/vxr/notebooks/SONiC/traffic/trex_cfg.yaml", "/etc/trex_cfg.yaml")
-    transfer.put("/home/vxr/notebooks/SONiC/traffic/test-new.yaml", "/opt/cisco/trex/latest/cap2/test-new.yaml")
+    transfer.put("traffic/trex_cfg.yaml", "/etc/trex_cfg.yaml")
+    transfer.put("traffic/test-new.yaml", "/opt/cisco/trex/latest/cap2/test-new.yaml")
     transfer.close() 
 
     # Interact mode to perform the configurations for the traffic
@@ -67,8 +67,8 @@ def generate_hipriority_traffic (trexipaddress, trexport):
     
     # SFTP for file transfer
     transfer = client1.open_sftp()
-    transfer.put("/home/vxr/notebooks/SONiC/traffic/trex_cfg.yaml", "/etc/trex_cfg.yaml")
-    transfer.put("/home/vxr/notebooks/SONiC/traffic/dscp_traffic1.py", "/opt/cisco/trex/latest/stl/dscp_traffic1.py")
+    transfer.put("traffic/trex_cfg.yaml", "/etc/trex_cfg.yaml")
+    transfer.put("traffic/dscp_traffic1.py", "/opt/cisco/trex/latest/stl/dscp_traffic1.py")
     transfer.close() 
     
     # Interact mode to perform the configurations for the traffic
@@ -128,8 +128,8 @@ def generate_3traffic_streams (trexipaddress, trexport):
     
     # SFTP for file transfer
     transfer = client1.open_sftp()
-    transfer.put("/home/vxr/notebooks/SONiC/traffic/trex_cfg.yaml", "/etc/trex_cfg.yaml")
-    transfer.put("/home/vxr/notebooks/SONiC/traffic/traffic_3st.py", "/opt/cisco/trex/latest/stl/traffic_3st.py")
+    transfer.put("traffic/trex_cfg.yaml", "/etc/trex_cfg.yaml")
+    transfer.put("traffic/traffic_3st.py", "/opt/cisco/trex/latest/stl/traffic_3st.py")
     transfer.close() 
     
     # Interact mode to perform the configurations for the traffic
