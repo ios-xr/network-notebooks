@@ -16,7 +16,7 @@ import random
 print(sys.version)
 logger = logging.getLogger()
 logger.setLevel(logging.ERROR)
-from image_version import *
+from lib.image_version import *
 #from genie import testbed
 from pyats.topology import loader
 from paramiko_expect import SSHClientInteraction
