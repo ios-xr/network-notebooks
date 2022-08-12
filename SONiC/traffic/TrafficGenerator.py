@@ -35,8 +35,8 @@ def generate_bidir_traffic(trexipaddress, trexport):
     interact = SSHClientInteraction(client, timeout=30, display=True)
     interact.expect(PROMPT)
 
-    interact.send('ifconfig eth1 up; ifconfig eth2 up')
-    interact.expect(PROMPT)
+    #interact.send('ifconfig eth1 up; ifconfig eth2 up')
+    #interact.expect(PROMPT)
 
     interact.send('cd /opt/cisco/trex/latest/cap2/; ls -lart test-new.yaml; cd /opt/cisco/trex/latest/')
     interact.expect(PROMPT)
