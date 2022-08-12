@@ -3,9 +3,9 @@ devices:
     alias: L0
     connections:
       cli:
-        ip: 10.10.20.23
+        ip: 10.10.20.226
         port: 60001
-        protocol: telnet
+        protocol: ssh
     credentials:
       default:
         password: cisco123
@@ -17,9 +17,9 @@ devices:
     alias: L1
     connections:
       cli:
-        ip: 10.10.20.23
+        ip: 10.10.20.227
         port: 60002
-        protocol: telnet
+        protocol: ssh
     credentials:
       default:
         password: cisco123
@@ -31,9 +31,9 @@ devices:
     alias: S0
     connections:
       cli:
-        ip: 10.10.20.23
+        ip: 10.10.20.228
         port: 60003
-        protocol: telnet
+        protocol: ssh
     credentials:
       default:
         password: cisco123
@@ -45,9 +45,9 @@ devices:
     alias: S1
     connections:
       cli:
-        ip: 10.10.20.23
+        ip: 10.10.20.229
         port: 60004
-        protocol: telnet
+        protocol: ssh
     credentials:
       default:
         password: cisco123
@@ -59,7 +59,7 @@ devices:
     alias: trex
     connections:
       cli:
-        ip: 10.10.20.23
+        ip: 10.10.20.230
         port: 60022
         protocol: ssh
     credentials:
