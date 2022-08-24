@@ -1,7 +1,8 @@
-# DESCRIPTION: This is a small library that can be reused to bring up a 3 router Service-Provider network topology with OSPF and MPLS and # traffic generators connected to either of the PE routers.
+# DESCRIPTION: This is a small library that can be reused to bring up a 4 router Service-Provider network topology with OSPF and MPLS and 
+# traffic generators connected to either of the PE routers.
 # PLATFORM: Emulator for CISCO 8000
-# TOPOLOGY: TGN-------------PE1-------------P1--------------PE2--------------TGN
-#                                OSPF+MPLS       OSPF+MPLS        
+# TOPOLOGY: TGN--------PE1--------P1----------P2---------PE2---------TGN
+#                         OSPF+MPLS  OSPF+MPLS  OSPF+MPLS  
 # AUTHOR: Sarah Samuel (sasamuel@cisco.com)
 # DATE: 1 April 2020
 
@@ -49,15 +50,21 @@ interface Loopback0
  ipv4 address 209.165.200.225 255.255.255.255
 !
 interface FourHundredGigE0/0/0/0
- description Connected_to_PE2
+ description Connected_to_PE1
  mtu 9216
  ipv4 address 198.51.100.1 255.255.255.0
  no shutdown
 !
 interface FourHundredGigE0/0/0/1
- description Connected_to_PE1
+ description Connected_to_P2
  mtu 9216
  ipv4 address 192.0.2.1 255.255.255.0
+ no shutdown
+!
+interface FourHundredGigE0/0/0/2
+ description Connected_to_TREX_eth4
+ mtu 9216
+ ipv4 address 10.8.8.2 255.255.255.0
  no shutdown
 !
 router ospf 10
@@ -71,6 +78,53 @@ router ospf 10
 !
 mpls ldp
  router-id 209.165.200.225
+ interface FourHundredGigE0/0/0/1
+ interface FourHundredGigE0/0/0/0
+ !
+!
+ """
+p2_config_str = """
+ssh server v2
+ssh server netconf
+netconf-yang agent ssh
+
+hostname P2
+line console
+ exec-timeout 0 0
+ absolute-timeout 0
+ session-timeout 0
+!
+line default
+ exec-timeout 0 0
+ absolute-timeout 0
+ session-timeout 0
+!
+interface Loopback0
+ ipv4 address 209.165.200.226 255.255.255.255
+!
+interface FourHundredGigE0/0/0/0
+ description Connected_to_P1
+ mtu 9216
+ ipv4 address 192.0.2.2 255.255.255.0
+ no shutdown
+!
+interface FourHundredGigE0/0/0/1
+ description Connected_to_PE2
+ mtu 9216
+ ipv4 address 203.0.113.1 255.255.255.0
+ no shutdown
+!
+router ospf 10
+ router-id 209.165.200.226
+ area 0
+  interface FourHundredGigE0/0/0/0
+  interface FourHundredGigE0/0/0/1
+  interface Loopback0
+  !
+ !
+!
+mpls ldp
+ router-id 209.165.200.226
  interface FourHundredGigE0/0/0/1
  interface FourHundredGigE0/0/0/0
  !
@@ -97,21 +151,15 @@ interface Loopback0
  ipv4 address 209.165.200.227 255.255.255.255
 !
 interface FourHundredGigE0/0/0/0
- description Connected_to_CE1
+ description Connected_to_TREX
  mtu 9216
- ipv4 address 203.0.113.2 255.255.255.0
+ ipv4 address 10.0.0.2 255.255.255.0
  no shutdown
 !
 interface FourHundredGigE0/0/0/1
  description Connected_to_P1
  mtu 9216
- ipv4 address 192.0.2.2 255.255.255.0
- no shutdown
-!
-interface FourHundredGigE0/0/0/2
- description Connected_to_TREX
- mtu 9216
- ipv4 address 10.0.0.2 255.255.255.0
+ ipv4 address 198.51.100.2 255.255.255.0
  no shutdown
 !
 router ospf 10
@@ -150,28 +198,28 @@ line default
  session-timeout 0
 !
 interface Loopback0
- ipv4 address 209.165.200.229 255.255.255.255
+ ipv4 address 209.165.200.228 255.255.255.255
 !
 interface FourHundredGigE0/0/0/0
- description Connected_to_CE2
+ description Connected_to_P2
  mtu 9216
- ipv4 address 209.165.201.2 255.255.255.224
+ ipv4 address 203.0.113.2 255.255.255.0
  no shutdown
  !
 interface FourHundredGigE0/0/0/1
- description Connected_to_P1
- mtu 9216
- ipv4 address 198.51.100.2 255.255.255.0
- no shutdown
-!
-interface FourHundredGigE0/0/0/2
- description Connected_to_TREX
+ description Connected_to_TREX_eth2
  mtu 9216
  ipv4 address 10.1.1.2 255.255.255.0
  no shutdown
 !
+interface FourHundredGigE0/0/0/2
+ description Connected_to_TREX_eth3
+ mtu 9216
+ ipv4 address 10.9.9.1 255.255.255.0
+ no shutdown
+!
 router ospf 10
- router-id 209.165.200.229
+ router-id 209.165.200.228
  area 0
   interface FourHundredGigE0/0/0/0
   interface FourHundredGigE0/0/0/1
@@ -181,7 +229,7 @@ router ospf 10
  !
 !
 mpls ldp
- router-id 209.165.200.229
+ router-id 209.165.200.228
  interface FourHundredGigE0/0/0/0
  interface FourHundredGigE0/0/0/1
  interface FourHundredGigE0/0/0/2
@@ -189,57 +237,6 @@ mpls ldp
 !
  """
 
-ce1_config_str = """
-ssh server v2
-ssh server netconf
-netconf-yang agent ssh
-
-hostname CE1
-!
-policy-map set-dscp
- class class-default
-  set dscp ef
- ! 
- end-policy-map
-!
-interface Loopback0
- ipv4 address 209.165.200.231 255.255.255.255
-!
-interface FourHundredGigE0/0/0/0
- description Connected_to_PE1
- mtu 9216
- ipv4 address 203.0.113.1 255.255.255.0
- no shutdown
-!
-router static
- address-family ipv4 unicast
-  209.165.201.0/24 203.0.113.2
- !
-!
-"""
-
-ce2_config_str = """
-ssh server v2
-ssh server netconf
-netconf-yang agent ssh
-
-hostname CE2
-!
-interface Loopback0
- ipv4 address 209.165.200.233 255.255.255.255
-!
-interface FourHundredGigE0/0/0/0
- description Connected_to_PE2
- mtu 9216
- ipv4 address 209.165.201.1 255.255.255.224
- no shutdown
-!
-router static
- address-family ipv4 unicast
-  203.0.113.0/24 209.165.201.2
- !
-!
-"""
 
 cfg = { 'simulation':
          {'skip_auto_bringup': False, 
@@ -252,8 +249,23 @@ cfg = { 'simulation':
         {'rp1': {'platform':'spitfire_f-baked',
                 'xr_port_redir': [22, 830],
                 'linecard_types': ['8201-sys'], 
-                'data_ports': ['FourH0/0/0/0', 'FourH0/0/0/1'],
+                'data_ports': ['FourH0/0/0/0', 'FourH0/0/0/1', 'FourH0/0/0/2'],
                 'xr_config' : p1_config_str,
+                'image': sim_image_global,
+                'vxr_sim_config': {
+                     'shelf': {
+                       'ConfigOvxr': ConfigOvxr_global,
+                       'ConfigEnableNgdp': ConfigEnableNgdp_global,
+                       'ConfigS1SdkVer': ConfigS1SdkVer_global,
+                       'ConfigS1NpsuiteVer': ConfigS1NpsuiteVer_global
+                     }
+                  }
+                },
+         'rp2': {'platform':'spitfire_f-baked',
+                'xr_port_redir': [22, 830],
+                'linecard_types': ['8201-sys'], 
+                'data_ports': ['FourH0/0/0/0', 'FourH0/0/0/1'],
+                'xr_config' : p2_config_str,
                 'image': sim_image_global,
                 'vxr_sim_config': {
                      'shelf': {
@@ -267,7 +279,7 @@ cfg = { 'simulation':
          'rpe1': {'platform':'spitfire_f-baked',
                 'xr_port_redir': [22, 830],
                 'linecard_types': ['8201-sys'],  
-                'data_ports': ['FourH0/0/0/0', 'FourH0/0/0/1', 'FourH0/0/0/2'],
+                'data_ports': ['FourH0/0/0/0', 'FourH0/0/0/1'],
                 'xr_config' : pe1_config_str,
                 'image': sim_image_global,
                 'vxr_sim_config': {
@@ -294,52 +306,23 @@ cfg = { 'simulation':
                      }
                   }
                 },
-         'rce1': {'platform':'spitfire_f-baked',
-                'xr_port_redir': [22, 830],
-                'linecard_types': ['8201-sys'],  
-                'data_ports': ['FourH0/0/0/0', 'FourH0/0/0/1'],
-                'xr_config' : ce1_config_str,
-                'image': sim_image_global,
-                'vxr_sim_config': {
-                     'shelf': {
-                       'ConfigOvxr': ConfigOvxr_global,
-                       'ConfigEnableNgdp': ConfigEnableNgdp_global,
-                       'ConfigS1SdkVer': ConfigS1SdkVer_global,
-                       'ConfigS1NpsuiteVer': ConfigS1NpsuiteVer_global
-                     }
-                  }
-                },
-         'rce2': {'platform':'spitfire_f-baked',
-                'xr_port_redir': [22, 830],
-                'linecard_types': ['8201-sys'],  
-                'data_ports': ['FourH0/0/0/0', 'FourH0/0/0/1'],
-                'xr_config' : ce2_config_str,
-                'image': sim_image_global,
-                'vxr_sim_config': {
-                     'shelf': {
-                       'ConfigOvxr': ConfigOvxr_global,
-                       'ConfigEnableNgdp': ConfigEnableNgdp_global,
-                       'ConfigS1SdkVer': ConfigS1SdkVer_global,
-                       'ConfigS1NpsuiteVer': ConfigS1NpsuiteVer_global
-                     }
-                  }
-                },
          'trex': {'platform':'linux',
                   'xr_port_redir': [21, 22, 23, 50, 53, 80],
                   'vcpu': 8,
                   'memory': '5GB',
-                  'data_ports': ['eth1', 'eth2'],
+                  'data_ports': ['eth1', 'eth2', 'eth3', 'eth4'],
                   'image': '/opt/cisco/images/linux/centos7_serial.qcow2'
                  }
         },
        'connections':
            {'hubs':
-               {'hub570':['rce1.FourH0/0/0/0', 'rpe1.FourH0/0/0/0'],
-               'hub571':['rpe1.FourH0/0/0/1', 'rp1.FourH0/0/0/1'],
-               'hub572':['rp1.FourH0/0/0/0', 'rpe2.FourH0/0/0/1'],
-               'hub573':['rpe2.FourH0/0/0/0', 'rce2.FourH0/0/0/0'],
-               'hub574':['trex.eth1', 'rpe1.FourH0/0/0/2'],
-               'hub575':['trex.eth2', 'rpe2.FourH0/0/0/2'] 
+               {'hub570':['rpe1.FourH0/0/0/1', 'rp1.FourH0/0/0/0'],
+               'hub571':['rp1.FourH0/0/0/1', 'rp2.FourH0/0/0/0'],
+               'hub572':['rp2.FourH0/0/0/1', 'rpe2.FourH0/0/0/0'],
+               'hub573':['trex.eth1', 'rpe1.FourH0/0/0/0'],
+               'hub574':['trex.eth2', 'rpe2.FourH0/0/0/1'],
+               'hub575':['trex.eth3', 'rpe2.FourH0/0/0/2'],
+               'hub576':['trex.eth4', 'rp1.FourH0/0/0/2'] 
                }
            },
       }
@@ -369,3 +352,4 @@ def get_ssh_cmd(sim, device, is_server=False):
         return "ssh root@" + str(console_ports[device]['HostAgent']) + ' -p' + str(console_ports[device]['xr_redir22'])
     else:
         return "ssh cisco@" + str(console_ports[device]['HostAgent']) + ' -p' + str(console_ports[device]['xr_redir22'])
+
