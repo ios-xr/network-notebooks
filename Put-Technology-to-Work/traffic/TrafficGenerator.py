@@ -169,10 +169,7 @@ def generate_3traffic_streams (trexipaddress, trexport):
     return client1, client2, interact1, interact2
 
 
-# Overriding the get_ssh_cmd function for accessing the traffic generator server
-def get_ssh_cmd_server(sim, device):
-    console_ports = sim.get_console_ports()
-    return "ssh root@" + str(console_ports[device]['ip']) + ' -p' + str(console_ports[device]['ssh'])
+
     
     
     
