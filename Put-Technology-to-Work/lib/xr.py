@@ -1,3 +1,8 @@
+# DESCRIPTION: This is a small library that contains imports functions that can be reused across the IOS XR notebooks in the DevNet Sandbox
+# PLATFORM: Emulator for CISCO 8000
+# Sarah Samuel (sasamuel@cisco.com)
+# DATE: 21 September 2022
+
 from pathlib import Path
 
 import sys
