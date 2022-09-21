@@ -1,0 +1,73 @@
+devices:
+  rp1:
+    alias: P1
+    connections:
+      cli:
+        ip: 10.10.20.226
+        port: 62027
+        protocol: ssh
+    credentials:
+      default:
+        password: cisco123
+        username: cisco
+    os: iosxr
+    platform: spitfire
+    type: router
+  rp2:
+    alias: P2
+    connections:
+      cli:
+        ip: 10.10.20.227
+        port: 63506
+        protocol: ssh
+    credentials:
+      default:
+        password: cisco123
+        username: cisco
+    os: iosxr
+    platform: spitfire
+    type: router
+  rpe1:
+    alias: PE1
+    connections:
+      cli:
+        ip: 10.10.20.228
+        port: 62837
+        protocol: ssh
+    credentials:
+      default:
+        password: cisco123
+        username: cisco
+    os: iosxr
+    platform: spitfire
+    type: router
+  rpe2:
+    alias: PE2
+    connections:
+      cli:
+        ip: 10.10.20.229
+        port: 62996
+        protocol: ssh
+    credentials:
+      default:
+        password: cisco123
+        username: cisco
+    os: iosxr
+    platform: spitfire
+    type: router
+  trex:
+    alias: trex
+    connections:
+      cli:
+        ip: 10.10.20.230
+        port: 64254
+        protocol: ssh
+    credentials:
+      default:
+        password: cisco123
+        username: root
+    os: linux
+    platform: linux
+    type: linux
+testbed:
+  name: QoS-Testbed
