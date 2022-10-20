@@ -4,7 +4,7 @@ devices:
     connections:
       cli:
         ip: 10.10.20.226
-        port: 62027
+        port: 60001
         protocol: ssh
     credentials:
       default:
@@ -18,7 +18,7 @@ devices:
     connections:
       cli:
         ip: 10.10.20.227
-        port: 63506
+        port: 60002
         protocol: ssh
     credentials:
       default:
@@ -32,7 +32,7 @@ devices:
     connections:
       cli:
         ip: 10.10.20.228
-        port: 62837
+        port: 60003
         protocol: ssh
     credentials:
       default:
@@ -46,7 +46,7 @@ devices:
     connections:
       cli:
         ip: 10.10.20.229
-        port: 62996
+        port: 60004
         protocol: ssh
     credentials:
       default:
@@ -60,7 +60,7 @@ devices:
     connections:
       cli:
         ip: 10.10.20.230
-        port: 64254
+        port: 60022
         protocol: ssh
     credentials:
       default:
