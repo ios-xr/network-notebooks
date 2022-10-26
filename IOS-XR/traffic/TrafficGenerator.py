@@ -172,8 +172,8 @@ def generate_3traffic_streams (trexipaddress, trexport):
 # The below function stops the traffic and ends the sessions. 
 # TREX is in stateless mode
 def stop_traffic (client1, client2, interact1, interact2):
-    interact2.send('stop')
-    interact2.expect('.*trex.*', timeout=60)
+    interact2.send('stop -a')
+    interact2.expect('.*trex.*', timeout=10)
     
     interact1.send('cd /opt/cisco/trex/latest/')
     interact1.expect(PROMPT)
