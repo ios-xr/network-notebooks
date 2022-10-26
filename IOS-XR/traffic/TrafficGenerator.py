@@ -170,30 +170,24 @@ def generate_3traffic_streams (trexipaddress, trexport):
     return client1, client2, interact1, interact2
 
 # The below function stops the traffic and ends the sessions. 
-# TREX is in stateless mode
-def stop_traffic (client1, client2, interact1, interact2):
+# Stateless mode
+def stop_traffic (client1, client2, interact1, interact2, access_handle):
     interact2.send('stop -a')
-    interact2.expect('.*trex.*', timeout=10)
-    
-    interact1.send('cd /opt/cisco/trex/latest/')
-    interact1.expect(PROMPT)
-    
-    interact1.send('sudo ./dpdk_nic_bind.py --force -u 00:04.0')
-    interact1.expect(PROMPT)
-    
-    interact1.send('sudo ./dpdk_nic_bind.py --force -u 00:05.0')
-    interact1.expect(PROMPT)
-    
-    interact1.send('sudo ./dpdk_nic_bind.py --bind=virtio-pci 00:04.0')
-    interact1.expect(PROMPT)
-    
-    interact1.send('sudo ./dpdk_nic_bind.py --bind=virtio-pci 00:05.0')
-    interact1.expect(PROMPT)
-    
-    interact1.close()
+    interact2.expect('.*trex.*', timeout=5)
     interact2.close()
-    client1.close()
     client2.close()
+    interact1.close()
+    client1.close()
+    
+    out = access_handle.execute('cd /opt/cisco/trex/latest/')
+    
+    out = access_handle.execute('sudo ./dpdk_nic_bind.py --force -u 00:04.0')
+    
+    out = access_handle.execute('sudo ./dpdk_nic_bind.py --force -u 00:05.0')
+    
+    out = access_handle.execute('sudo ./dpdk_nic_bind.py --bind=virtio-pci 00:04.0')
+    
+    out = access_handle.execute('sudo ./dpdk_nic_bind.py --bind=virtio-pci 00:05.0')
 
 
 
