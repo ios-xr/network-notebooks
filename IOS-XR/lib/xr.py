@@ -20,6 +20,7 @@ from paramiko_expect import SSHClientInteraction
 import paramiko
 from traffic.TrafficGenerator import generate_bidir_traffic
 from traffic.TrafficGenerator import generate_hipriority_traffic
+from traffic.TrafficGenerator import stop_traffic
     
 pe1_config_str = """
 ssh server v2
