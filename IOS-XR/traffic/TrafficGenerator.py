@@ -43,6 +43,7 @@ def generate_bidir_traffic(trexipaddress, trexport):
     interact.send('exit')
     interact.expect()
 
+    interact.close()
     client.close()
     return
 
@@ -173,6 +174,21 @@ def generate_3traffic_streams (trexipaddress, trexport):
 def stop_traffic (client1, client2, interact1, interact2):
     interact2.send('stop')
     interact2.expect('.*trex.*', timeout=60)
+    
+    interact1.send('cd /opt/cisco/trex/latest/')
+    interact1.expect(PROMPT)
+    
+    interact1.send('sudo ./dpdk_nic_bind.py --force -u 00:04.0')
+    interact1.expect(PROMPT)
+    
+    interact1.send('sudo ./dpdk_nic_bind.py --force -u 00:05.0')
+    interact1.expect(PROMPT)
+    
+    interact1.send('sudo ./dpdk_nic_bind.py --bind=virtio-pci 00:04.0')
+    interact1.expect(PROMPT)
+    
+    interact1.send('sudo ./dpdk_nic_bind.py --bind=virtio-pci 00:05.0')
+    interact1.expect(PROMPT)
     
     interact1.close()
     interact2.close()
