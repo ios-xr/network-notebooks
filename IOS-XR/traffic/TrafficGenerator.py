@@ -168,6 +168,17 @@ def generate_3traffic_streams (trexipaddress, trexport):
     
     return client1, client2, interact1, interact2
 
+# The below function stops the traffic and ends the sessions. 
+# TREX is in stateless mode
+def stop_traffic (client1, client2, interact1, interact2):
+    interact2.send('stop')
+    interact2.expect('.*trex.*', timeout=60)
+    
+    interact1.close()
+    interact2.close()
+    client1.close()
+    client2.close()
+
 
 
     
