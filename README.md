@@ -86,9 +86,17 @@ The pyvxr API sends your configurations to the virtual routers and retreives rea
 
 * [Super-charge Your Router Performance With Service-layer APIs](./Put-Technology-to-Work/ServiceLayer/ServiceLayerAPI.ipynb) 
 
+<i>SONiC - Open Source Network OS</i>
+
+* [3-Stage Clos Network to make Networks Scalable](./SONiC/3StageClos-Notebook.ipynb) 
+
+* [3-Stage Clos Network with Static VXLAN](./SONiC/StaticVxlan-Notebook.ipynb)
+
+* [3-Stage Clos Network with Port Channels](./SONiC/3StageClos-PortChannels-Notebook.ipynb)
+
 <i> Utilities </i>
 
-* [Python Library to Generate Real-time Traffic On Simulated Networks](./Put-Technology-to-Work/trafficUtils/README.md) 
+* [Python Library to Generate Real-time Traffic On Simulated Networks](./IOS-XR/traffic/README.md) 
 
 
 
