@@ -60,9 +60,9 @@ The pyvxr API sends your configurations to the virtual routers and retreives rea
 
 <i>Traffic Management</i>
 
-* [QoS, to make Networks Dependable](./IOS-XR/QoS-policies.ipynb)
+* [QoS, to make Networks Dependable](./IOS-XR/QoS-Policies-Notebook.ipynb)
 
-* [Prioritize Delay-Sensitive Traffic Using QOS](./IOS-XR/QoS-high-priority-flows.ipynb)
+* [Prioritize Delay-Sensitive Traffic Using QOS](./IOS-XR/QoS-PrioritizeTraffic-Notebook.ipynb)
 
 * [Filter Network Traffic Using Access Control List ](./Put-Technology-to-Work/ACL/Access-Control-List.ipynb)
 
@@ -80,7 +80,7 @@ The pyvxr API sends your configurations to the virtual routers and retreives rea
 
 * [Deploy YANG Data Model to Stream CPU Utilization Data Using Model-driven Telemetry](./Put-Technology-to-Work/Telemetry/TelemetryDialOutYang.ipynb)
 
-* [Setup a Pipeline and Stream CPU Utilization Data Using Model-driven Telemetry](./IOS-XR/TelemetryDialOutGPB-Yang.ipynb)
+* [Setup a Pipeline and Stream CPU Utilization Data Using Model-driven Telemetry](./IOS-XR/Telemetry-GPBYang-Notebook.ipynb)
 
 <i>APIs</i>
 
