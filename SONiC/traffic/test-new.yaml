@@ -1,12 +1,12 @@
-- duration : 0.5
+- duration : 30
   generator :  
           distribution : "seq"
-          clients_start : "10.0.6.2"
-          clients_end   : "10.0.6.2"
-          servers_start : "10.0.5.2"
-          servers_end   : "10.0.5.2"
-          clients_per_gb : 201
-          min_clients    : 101
+          servers_start : "10.0.6.2"
+          servers_end   : "10.0.6.2"
+          clients_start : "10.0.5.2"
+          clients_end   : "10.0.5.2"
+          clients_per_gb : 2
+          min_clients    : 1
           dual_port_mask : "1.0.0.0" 
           tcp_aging      : 0
           udp_aging      : 0
