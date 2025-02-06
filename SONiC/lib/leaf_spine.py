@@ -12,7 +12,7 @@ import shutil
 import getpass
 import string
 import random
-#import genie
+import time
 print(sys.version)
 logger = logging.getLogger()
 logger.setLevel(logging.ERROR)
