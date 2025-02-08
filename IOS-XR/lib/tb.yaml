@@ -3,7 +3,7 @@ devices:
     alias: P1
     connections:
       cli:
-        ip: 10.10.20.226
+        ip: 10.10.20.234
         port: 60001
         protocol: ssh
     credentials:
@@ -17,7 +17,7 @@ devices:
     alias: P2
     connections:
       cli:
-        ip: 10.10.20.227
+        ip: 10.10.20.235
         port: 60002
         protocol: ssh
     credentials:
@@ -31,7 +31,7 @@ devices:
     alias: PE1
     connections:
       cli:
-        ip: 10.10.20.228
+        ip: 10.10.20.236
         port: 60003
         protocol: ssh
     credentials:
@@ -45,7 +45,7 @@ devices:
     alias: PE2
     connections:
       cli:
-        ip: 10.10.20.229
+        ip: 10.10.20.237
         port: 60004
         protocol: ssh
     credentials:
@@ -59,7 +59,7 @@ devices:
     alias: trex
     connections:
       cli:
-        ip: 10.10.20.230
+        ip: 10.10.20.238
         port: 60022
         protocol: ssh
     credentials:
